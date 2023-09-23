@@ -32,4 +32,3 @@ curl --request GET "http://localhost:3001/countries/united%20states/medals?sort_
 
 {"medals":[{"year":1968,"city":"Mexico","season":"Summer","name":"ZORN, Zachary","country":"United States","gender":"Men","sport":"Aquatics","discipline":"Swimming","event":"4X100M Freestyle Relay"},...]}
 ```
-
