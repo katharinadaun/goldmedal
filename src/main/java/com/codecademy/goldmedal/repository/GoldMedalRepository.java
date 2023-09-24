@@ -18,6 +18,6 @@ public interface GoldMedalRepository extends CrudRepository<GoldMedal,Long> {
     List<GoldMedal> findByCountryOrderByEventAsc(String country);
     List<GoldMedal> findByCountryOrderByEventDesc(String country);
     List<GoldMedal> findByCountryAndSeasonOrderByYearAsc(String country, String season);
-    List<GoldMedal> findBySeasonOrderByYearAsc(String season);
+    int countBySeason(String season);
     List<GoldMedal> findByCountryAndGender(String country, String gender);
 }

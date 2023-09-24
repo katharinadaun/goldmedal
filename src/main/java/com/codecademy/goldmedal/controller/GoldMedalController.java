@@ -76,13 +76,13 @@ public class GoldMedalController {
 
         var summerWins = this.goldMedalRepository.findByCountryAndSeasonOrderByYearAsc(countryName, "Summer");
         var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null;
-        var totalSummerEvents = this.goldMedalRepository.findBySeasonOrderByYearAsc("Summer").size();
+        var totalSummerEvents = this.goldMedalRepository.countBySeason("Summer");
         var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
         var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
 
         var winterWins = this.goldMedalRepository.findByCountryAndSeasonOrderByYearAsc(countryName, "Winter");
         var numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
-        var totalWinterEvents = this.goldMedalRepository.findBySeasonOrderByYearAsc("Summer").size();
+        var totalWinterEvents = this.goldMedalRepository.countBySeason("Winter");
         var percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
         var yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
 
@@ -106,9 +106,6 @@ public class GoldMedalController {
     private List<CountrySummary> getCountrySummaries(String sortBy, boolean ascendingOrder) {
         List<Country> countries;
         switch (sortBy) {
-            case "name":
-                countries = ascendingOrder ? this.countryRepository.findByOrderByNameAsc() : this.countryRepository.findByOrderByNameDesc();
-                break;
             case "gdp":
                 countries = ascendingOrder ? this.countryRepository.findByOrderByGdpAsc() : this.countryRepository.findByOrderByGdpDesc();
                 break;
@@ -116,6 +113,7 @@ public class GoldMedalController {
                 countries = ascendingOrder ? this.countryRepository.findByOrderByPopulationAsc() : this.countryRepository.findByOrderByPopulationDesc();
                 break;
             case "medals": // additional logic below will handle that
+            case "name":
             default:
                 countries = ascendingOrder ? this.countryRepository.findByOrderByNameAsc() : this.countryRepository.findByOrderByNameDesc();
                 break;
